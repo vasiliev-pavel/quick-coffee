@@ -33,7 +33,7 @@ export const categories = [
 export const products = [
     {
         id: 1,
-        photo: "cappuccino.jpg",
+        photo: "./coffee.jpg",
         video: "cappuccino.mp4",
         title: "Cappuccino",
         description: "Classic coffee with steamed microfoam",

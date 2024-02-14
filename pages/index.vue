@@ -1,23 +1,10 @@
 <template>
   <div>
-    <Header
-      :components="components.map((component) => component.title)"
-      @switch="switchToComponent"
-    />
-    <div
-      class="draggable-container"
-      @mousedown="startDragging"
-      @touchstart="startDragging"
-      :style="containerStyle"
-    >
+    <Header :components="components.map((component) => component.title)" @switch="switchToComponent" />
+    <div class="draggable-container" @mousedown="startDragging" @touchstart="startDragging" :style="containerStyle">
       <div class="components" :style="componentsStyle">
-        <DynamicComponent
-          v-for="(component, index) in components"
-          :key="index"
-          :title="component.title"
-          :content="component.content"
-          :color="component.color"
-        />
+        <DynamicComponent v-for="(component, index) in components" :key="index" :title="component.title"
+          :content="component.content" :color="component.color" />
       </div>
     </div>
   </div>
@@ -25,11 +12,12 @@
 
 <script setup>
 import { ref } from "vue";
+
+
 const components = ref([
   { title: "Компонент A", content: "Содержимое A", color: "#ffcccc" },
   { title: "Компонент B", content: "Содержимое B", color: "#ccffcc" },
   { title: "Компонент C", content: "Содержимое C", color: "#ccfffc" },
-  // Добавьте другие компоненты с цветами здесь
 ]);
 
 const translateX = ref(0);
