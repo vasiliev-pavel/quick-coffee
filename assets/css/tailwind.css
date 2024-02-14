@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html,
+body {
+  overflow: hidden; /* Убирает полосы прокрутки */
+  height: 100%; /* Устанавливает высоту страницы на 100% */
+}
