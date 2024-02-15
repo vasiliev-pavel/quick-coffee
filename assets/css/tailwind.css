@@ -3,6 +3,9 @@
 @tailwind utilities;
 html,
 body {
-  overflow: hidden; /* Убирает полосы прокрутки */
+  overflow-x: hidden;
   height: 100%; /* Устанавливает высоту страницы на 100% */
+
+  margin: 0;
+  padding: 0;
 }

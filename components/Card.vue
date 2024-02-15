@@ -35,7 +35,7 @@
     <h5 class="mt-2 text-center text-xl font-medium text-gray-900">
       {{ title }}
     </h5>
-    <p class="text-center text-gray-700">{{ price }} ₽</p>
+    <p class="text-center text-gray-700">{{ price }} $</p>
     <p class="text-center text-gray-500">{{ volume }} мл</p>
   </div>
 </template>

@@ -1,9 +1,13 @@
+<!-- index.vue -->
 <template>
   <div>
     <Header
       :components="components.map((component) => component.title)"
+      :selected-index="selectedComponentIndex"
       @switch="switchToComponent"
+      class="flex"
     />
+
     <div
       class="draggable-container"
       @mousedown="startDragging"
@@ -26,9 +30,9 @@
 <script setup>
 import { ref } from "vue";
 const components = ref([
-  { title: "Компонент A", content: "Содержимое A", color: "#ffcccc" },
-  { title: "Компонент B", content: "Содержимое B", color: "#ccffcc" },
-  { title: "Компонент C", content: "Содержимое C", color: "#ccfffc" },
+  { title: "компонент а", content: "Содержимое A", color: "#ffcccc" },
+  { title: "компонент b", content: "Содержимое B", color: "#ccffcc" },
+  { title: "компонент c", content: "Содержимое C", color: "#ccfffc" },
   // Добавьте другие компоненты с цветами здесь
 ]);
 
@@ -37,10 +41,14 @@ const transition = ref("");
 const isDragging = ref(false);
 const startX = ref(0);
 const initialTranslateX = ref(0);
+let draggingOccurred = false; // Новая переменная для отслеживания факта перетаскивания
+
+const selectedComponentIndex = ref(0); // По умолчанию выбран первый компонент
 
 function switchToComponent(index) {
+  selectedComponentIndex.value = index; // Обновляем выбранный индекс
   const componentWidth = window.innerWidth;
-  translateX.value = -componentWidth * index; // Уже верно для перехода к компоненту
+  translateX.value = -componentWidth * index; // Перемещение к выбранному компоненту
   transition.value = "transform 0.5s ease"; // Анимация
 }
 
@@ -57,15 +65,16 @@ function startDragging(event) {
 
 function onDrag(event) {
   if (!isDragging.value) return;
+  draggingOccurred = true; // Устанавливаем флаг перетаскивания
   const currentX = event.touches ? event.touches[0].clientX : event.clientX;
   const deltaX = currentX - startX.value;
-  // Рассчитываем новое значение translateX на основе движения
   const newTranslateX = initialTranslateX.value + deltaX;
 
-  // Удаляем ограничение на два компонента и позволяем перетаскивание на полную ширину всех компонентов
-  // Максимальное смещение теперь зависит от количества компонентов
-  const maxTranslateX = -(window.innerWidth * (components.value.length - 1));
-  translateX.value = Math.min(Math.max(newTranslateX, maxTranslateX), 0);
+  // Обновите эту линию согласно вашей логике ограничения
+  translateX.value = Math.min(
+    Math.max(newTranslateX, -window.innerWidth * (components.value.length - 1)),
+    0
+  );
 }
 
 function stopDragging() {
@@ -78,24 +87,26 @@ function stopDragging() {
   const threshold = window.innerWidth * 0.3;
   const movedBy = translateX.value - initialTranslateX.value;
 
-  // Если перемещение не достигло порога, возвращаемся к текущему компоненту
-  if (Math.abs(movedBy) < threshold) {
-    translateX.value = initialTranslateX.value;
-  } else {
-    // Вычисляем индекс на основе направления перемещения
-    let targetIndex = -Math.round(translateX.value / window.innerWidth);
-    // Увеличиваем или уменьшаем индекс на основе направления перетаскивания
-    targetIndex += movedBy < 0 ? 1 : -1;
+  // Используйте selectedComponentIndex.value как базу для текущего индекса
+  let direction = movedBy < 0 ? 1 : -1; // Определение направления движения
+  let targetIndex = selectedComponentIndex.value + direction;
 
-    // Ограничиваем targetIndex в пределах доступных компонентов
+  // Проверка на достижение порогового значения для перетаскивания
+  if (Math.abs(movedBy) > threshold) {
+    // Ограничение targetIndex в пределах допустимых значений
     targetIndex = Math.max(
-      Math.min(targetIndex, components.value.length - 1),
-      0
+      0,
+      Math.min(targetIndex, components.value.length - 1)
     );
-    translateX.value = -window.innerWidth * targetIndex;
+  } else {
+    // Если не достигнут порог, возвращаемся к текущему индексу
+    targetIndex = selectedComponentIndex.value;
   }
 
-  transition.value = "transform 0.5s ease";
+  selectedComponentIndex.value = targetIndex; // Обновляем выбранный индекс
+  translateX.value = -window.innerWidth * targetIndex; // Перемещение к выбранному компоненту
+  transition.value = "transform 0.5s ease"; // Анимация
+  draggingOccurred = false;
 }
 
 // Вычисляемые свойства для стилей
@@ -107,16 +118,9 @@ const componentsStyle = computed(() => ({
 }));
 
 const containerStyle = computed(() => ({
-  marginTop: "60px",
   width: "100%",
-  overflow: "hidden",
+  overflowX: "hidden",
+  display: "flex",
+  flexDirection: "column" /* Указывает на вертикальное расположение */,
 }));
 </script>
-
-<style>
-.draggable-container {
-  margin-top: 60px;
-  width: 100%;
-  overflow: hidden;
-}
-</style>
