@@ -7,6 +7,6 @@ export default defineNuxtConfig({
     host: "0.0.0.0",
   },
   devtools: { enabled: true },
-  modules: ["@nuxtjs/tailwindcss"],
+  modules: ["@nuxtjs/tailwindcss", "shadcn-nuxt"],
   css: ["~/assets/css/transitions.css"],
 });
