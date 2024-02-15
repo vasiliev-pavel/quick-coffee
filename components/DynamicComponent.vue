@@ -20,7 +20,7 @@
       </div>
       <!-- Карточки продукции остаются ниже -->
       <div class="coffee-cards grid grid-cols-2 gap-5 m-5">
-        <Card
+        <MainCard
           v-for="coffee in coffees"
           :key="coffee.id"
           :title="coffee.title"

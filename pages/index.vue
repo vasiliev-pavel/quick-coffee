@@ -29,6 +29,7 @@
 
 <script setup>
 import { ref } from "vue";
+
 const components = ref([
   { title: "компонент а", content: "Содержимое A", color: "#ffcccc" },
   { title: "компонент b", content: "Содержимое B", color: "#ccffcc" },
