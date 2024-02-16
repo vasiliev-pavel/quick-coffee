@@ -41,6 +41,8 @@ const translateX = ref(0);
 const transition = ref("");
 const isDragging = ref(false);
 const startX = ref(0);
+const startY = ref(0); // Для хранения начальной позиции Y при касании
+
 const initialTranslateX = ref(0);
 let draggingOccurred = false; // Новая переменная для отслеживания факта перетаскивания
 
@@ -55,27 +57,43 @@ function switchToComponent(index) {
 
 function startDragging(event) {
   isDragging.value = true;
-  startX.value = event.touches ? event.touches[0].clientX : event.clientX;
+  const touchEvent = event.touches ? event.touches[0] : event;
+  startX.value = touchEvent.clientX;
+  startY.value = touchEvent.clientY; // Сохраняем начальную позицию Y
   initialTranslateX.value = translateX.value;
-  transition.value = ""; // Отключаем анимацию при начале перетаскивания
+  transition.value = "";
   window.addEventListener("mousemove", onDrag);
   window.addEventListener("mouseup", stopDragging);
-  window.addEventListener("touchmove", onDrag);
+  window.addEventListener("touchmove", onDrag, { passive: false }); // Добавляем { passive: false } для возможности preventDefault
   window.addEventListener("touchend", stopDragging);
 }
 
 function onDrag(event) {
   if (!isDragging.value) return;
-  draggingOccurred = true; // Устанавливаем флаг перетаскивания
-  const currentX = event.touches ? event.touches[0].clientX : event.clientX;
-  const deltaX = currentX - startX.value;
-  const newTranslateX = initialTranslateX.value + deltaX;
 
-  // Обновите эту линию согласно вашей логике ограничения
-  translateX.value = Math.min(
-    Math.max(newTranslateX, -window.innerWidth * (components.value.length - 1)),
-    0
-  );
+  const touchEvent = event.touches ? event.touches[0] : event;
+  const currentX = touchEvent.clientX;
+  const currentY = touchEvent.clientY;
+  const deltaX = currentX - startX.value;
+  const deltaY = currentY - startY.value;
+
+  // Проверяем, является ли движение преимущественно горизонтальным
+  if (Math.abs(deltaX) > Math.abs(deltaY)) {
+    event.preventDefault(); // Предотвращаем скролл/зум браузера
+    draggingOccurred = true;
+    const newTranslateX = initialTranslateX.value + deltaX;
+
+    translateX.value = Math.min(
+      Math.max(
+        newTranslateX,
+        -window.innerWidth * (components.value.length - 1)
+      ),
+      0
+    );
+  } else if (isDragging.value) {
+    // Если движение вертикальное и перетаскивание было начато, останавливаем его
+    stopDragging();
+  }
 }
 
 function stopDragging() {
@@ -122,6 +140,7 @@ const containerStyle = computed(() => ({
   width: "100%",
   overflowX: "hidden",
   display: "flex",
+  minHeight: "100%",
   flexDirection: "column" /* Указывает на вертикальное расположение */,
 }));
 </script>
