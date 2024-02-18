@@ -1,0 +1,11 @@
+{
+  "appId": "com.quick.coffee.app",
+  "appName": "quick-coffee",
+  "bundledWebRuntime": false,
+  "webDir": "dist",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  }
+}

@@ -1,4 +1,4 @@
-<!-- MainCard.vue -->
+<!-- Card.vue -->
 <template>
   <div
     class="p-4 bg-card rounded-[2rem] border shadow-md hover:bg-cardHover cursor-pointer"
