@@ -1,7 +1,19 @@
 <template>
-    <div>
-        <Menu category="Hot Coffee" :products="products" />
-    </div>
+    <Carousel class="overflow-hidden">
+        <CarouselContent>
+            <CarouselItem>
+                <Menu category="Hot Coffee" :products="products" />
+            </CarouselItem>
+            <CarouselItem>
+                <Menu category="Cold Coffee" :products="products" />
+            </CarouselItem>
+            <CarouselItem>
+                <Menu category="Fruit Coffee" :products="products" />
+            </CarouselItem>
+        </CarouselContent>
+        <CarouselPrevious />
+        <CarouselNext />
+    </Carousel>
 </template>
   
 <script>
