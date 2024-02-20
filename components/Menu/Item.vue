@@ -15,6 +15,16 @@
                 <div class="menu_item__content">
                     <h3>{{ product.title }}</h3>
                     <span>${{ product.price }}</span>
+                    <!-- <br />
+                    <span>Nutritions: {{ product.nutritions }}</span>
+                    <span>Weight: {{ product.weight }}</span>
+                    <span>Protein: {{ product.protein }}</span>
+                    <span>Fats: {{ product.fats }}</span>
+                    <span>Carbs: {{ product.carbs }}</span>
+                    <span>Ingredients: {{ product.ingredients.description }}</span>
+                    <span>May contain: {{ product.ingredients.may_contain }}</span>
+                    <span>Allergens: {{ product.ingredients.allergens }}</span> -->
+
                 </div>
                 <Carousel class="menu_carousel">
                     <CarouselContent class="menu_carousel_content">
@@ -59,6 +69,7 @@ export default {
     flex-direction: column;
     justify-content: space-between;
     border-radius: 10px;
+    transition: 0.4s all;
 
     background-color: #273341;
 
@@ -66,6 +77,16 @@ export default {
     margin: 10px;
     height: 100%;
     min-height: 220px;
+
+    img {
+        transition: 0.4s all;
+    }
+
+    &:hover {
+        img {
+            transform: scale(1.1);
+        }
+    }
 
 }
 
@@ -89,7 +110,7 @@ export default {
     display: flex;
     flex-direction: column;
     color: #fff;
-    background-image: linear-gradient(#000616, #000D16, #000D16);
+    background: rgba(15, 23, 42, 0.9);
 }
 
 .menu_carousel_content>div {

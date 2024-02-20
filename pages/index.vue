@@ -1,4 +1,5 @@
 <template>
+    <CategoryBar />
     <Carousel class="overflow-hidden">
         <CarouselContent>
             <CarouselItem>
@@ -11,8 +12,6 @@
                 <Menu category="Fruit Coffee" :products="products" />
             </CarouselItem>
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
     </Carousel>
 </template>
   
