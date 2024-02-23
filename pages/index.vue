@@ -1,18 +1,13 @@
 <template>
     <CategoryBar />
-    <Carousel class="overflow-hidden">
-        <CarouselContent>
-            <CarouselItem>
-                <Menu category="Hot Coffee" :products="products" />
-            </CarouselItem>
-            <CarouselItem>
-                <Menu category="Cold Coffee" :products="products" />
-            </CarouselItem>
-            <CarouselItem>
-                <Menu category="Fruit Coffee" :products="products" />
-            </CarouselItem>
-        </CarouselContent>
-    </Carousel>
+
+    <Section category="Hot Coffee" :products="products" />
+    <Section category="Hot Coffee" :products="products" />
+    <Section category="Cold Coffee" :products="products" />
+    <Section category="Fruit Coffee" :products="products" />
+    <Section category="Hot Coffee" :products="products" />
+
+    <Cart />
 </template>
   
 <script>
