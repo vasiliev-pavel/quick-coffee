@@ -11,9 +11,11 @@
 import { ref } from "vue";
 const supabase = useSupabaseClient();
 const router = useRouter();
+const userStore = useUserStore();
 
 const logOut = async () => {
   const { error } = await supabase.auth.signOut();
+  userStore.name = null;
   router.push("/");
 };
 </script>

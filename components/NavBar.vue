@@ -53,7 +53,7 @@ const test = () => {
 watchEffect(() => {
   // Здесь можно добавить дополнительную логику, например, редирект после логина
   if (userStore.name) {
-    console.log("Пользователь залогинен:", user);
+    console.log("Пользователь залогинен:", userStore.name);
   } else {
     console.log("Пользователь не залогинен");
   }
