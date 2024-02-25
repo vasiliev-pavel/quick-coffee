@@ -9,8 +9,11 @@
       </NuxtLink>
       <!-- Проверяем, залогинен ли пользователь -->
       <div class="flex flex-col text-right p-4">
-        <div v-if="user && user.user_metadata" @click="test">
-          {{ user.user_metadata.full_name }}
+        <div
+          v-if="userStore.name && userStore.name.user_metadata"
+          @click="test"
+        >
+          {{ userStore.name.user_metadata.full_name }}
           <span class="text-base text-slate-400">350 m</span>
         </div>
         <!-- Если пользователь не залогинен, показываем "Login" -->
@@ -44,7 +47,7 @@ const toggleLoginPopup = () => {
   isLoginPopupOpen.value = !isLoginPopupOpen.value;
 };
 const test = async () => {
-  router.push("/profiles");
+  router.push("profile");
 };
 
 onMounted(() => {
