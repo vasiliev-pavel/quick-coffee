@@ -15,7 +15,7 @@ const userStore = useUserStore();
 
 const logOut = async () => {
   const { error } = await supabase.auth.signOut();
-  userStore.name = null;
+  userStore.setData(null);
   router.push("/");
 };
 </script>

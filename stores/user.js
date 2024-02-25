@@ -6,8 +6,10 @@ export const useUserStore = defineStore(
   "user",
   () => {
     const name = ref(null);
-
-    return { name };
+    const setData = (data) => {
+      name.value = data;
+    };
+    return { name, setData };
   },
   {
     persist: {
