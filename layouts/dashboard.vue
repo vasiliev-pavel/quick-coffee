@@ -1,6 +1,6 @@
 <template>
     <header class="container relative overflow-x-hidden">
-        <NavBar />
+        <PanelBar />
     </header>
     <main class="container relative overflow-x-hidden">
         <slot />
