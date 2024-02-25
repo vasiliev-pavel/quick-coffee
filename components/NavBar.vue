@@ -8,23 +8,25 @@
         <span class="text-base text-slate-400">till 11:30</span>
       </NuxtLink>
       <!-- Проверяем, залогинен ли пользователь -->
-      <div class="flex flex-col text-right p-4">
-        <NuxtLink v-if="userStore.name" to="/profile">
-          <!-- Если пользователь залогинен, показываем его имя -->
-          {{ userStore.name.user_metadata.full_name }}
-          <span class="text-base text-slate-400">350 m</span>
-        </NuxtLink>
-        <!-- Если пользователь не залогинен, показываем "Login" -->
-        <div v-else>
-          <button
-            @click="toggleLoginPopup"
-            class="text-slate-400 font-bold py-2 px-4"
-          >
-            Login
-          </button>
-          <span class="text-base text-slate-400">350 m</span>
+      <ClientOnly fallback-tag="span" fallback="Loading data...">
+        <div class="flex flex-col text-right p-4">
+          <NuxtLink v-if="user" to="/profile">
+            <!-- Если пользователь залогинен, показываем его имя -->
+            {{ user.user_metadata.full_name }}
+            <span class="text-base text-slate-400">350 m</span>
+          </NuxtLink>
+          <!-- Если пользователь не залогинен, показываем "Login" -->
+          <div v-else>
+            <button
+              @click="toggleLoginPopup"
+              class="text-slate-400 font-bold py-2 px-4"
+            >
+              Login
+            </button>
+            <span class="text-base text-slate-400">350 m</span>
+          </div>
         </div>
-      </div>
+      </ClientOnly>
     </nav>
     <LoginPopup
       :isOpen="isLoginPopupOpen"
@@ -46,8 +48,8 @@ const toggleLoginPopup = () => {
 
 onMounted(() => {
   // Здесь можно добавить дополнительную логику, например, редирект после логина
-  if (userStore.name) {
-    console.log("Пользователь залогинен:", userStore.name);
+  if (user) {
+    console.log("Пользователь залогинен:", user);
   } else {
     console.log("Пользователь не залогинен");
   }
