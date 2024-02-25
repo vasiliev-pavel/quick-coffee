@@ -46,13 +46,13 @@ const isLoginPopupOpen = ref(false);
 const toggleLoginPopup = () => {
   isLoginPopupOpen.value = !isLoginPopupOpen.value;
 };
-const test = async () => {
-  router.push("profile");
+const test = () => {
+  router.push("/profile");
 };
 
-onMounted(() => {
+watchEffect(() => {
   // Здесь можно добавить дополнительную логику, например, редирект после логина
-  if (user) {
+  if (userStore.name) {
     console.log("Пользователь залогинен:", user);
   } else {
     console.log("Пользователь не залогинен");

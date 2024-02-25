@@ -5,7 +5,7 @@ import { parse, stringify } from "zipson";
 export const useUserStore = defineStore(
   "user",
   () => {
-    const name = ref(useSupabaseUser());
+    const name = ref(null);
 
     return { name };
   },
