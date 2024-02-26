@@ -6,12 +6,13 @@ export default defineEventHandler(async (event) => {
   if (!body) {
     return { error: "body are required" };
   }
+
   try {
     const price = await stripe.prices.create({
       currency: "usd",
       unit_amount: body.amount,
       product_data: {
-        name: body.serviceName,
+        name: body.name,
       },
     });
 
