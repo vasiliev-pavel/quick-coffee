@@ -6,8 +6,10 @@ export default defineEventHandler(async (event) => {
   if (!body) {
     return { error: "body are required" };
   }
+
   try {
     const YOUR_DOMAIN = getRequestURL(event).origin;
+    console.log(YOUR_DOMAIN);
     const session = await stripe.checkout.sessions.create({
       line_items: body.line_items,
       mode: "payment",

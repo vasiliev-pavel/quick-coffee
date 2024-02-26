@@ -19,7 +19,7 @@ const confirmPay = async () => {
     const { data: session } = await useFetch(`/api/payment`, {
       method: "post",
       body: {
-        line_items: createLineItems(),
+        line_items: await createLineItems(),
       },
     });
 
@@ -43,17 +43,20 @@ const createPrice = async () => {
         name: "Cappuccino",
       },
     });
+    console.log(price);
     return price.id;
   } catch (error) {
     console.error("Ошибка при создании цены:", error);
   }
 };
 
-const createLineItems = () => {
-  return {
-    price: createPrice(),
-    quantity: 1,
-  };
+const createLineItems = async () => {
+  return [
+    {
+      price: await createPrice(),
+      quantity: 1,
+    },
+  ];
   //   return Object.values(selectedServices).map((service) => ({
   //     price: service.price_id,
   //     quantity: 1,
