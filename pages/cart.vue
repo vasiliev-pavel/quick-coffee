@@ -22,13 +22,13 @@ const confirmPay = async () => {
         line_items: await createLineItems(),
       },
     });
-
+    console.log(session);
     // Перенаправляем пользователя на Stripe
-    if (session && session.value.url) {
-      navigateTo(`${session.value.url}`, { external: true });
-    } else {
-      console.error("Ошибка: URL сессии Stripe не получен");
-    }
+    // if (session && session.url) {
+    //   navigateTo(`${session.url}`, { external: true });
+    // } else {
+    //   console.error("Ошибка: URL сессии Stripe не получен");
+    // }
   } catch (error) {
     console.error("Ошибка при инициации сессии оплаты:", error);
   }

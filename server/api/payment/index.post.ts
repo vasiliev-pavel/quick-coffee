@@ -16,7 +16,7 @@ export default defineEventHandler(async (event) => {
       success_url: `${YOUR_DOMAIN}/cart?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${YOUR_DOMAIN}/cart?canceled=true`,
     });
-
+    console.log(session);
     return session;
   } catch (error) {
     // @ts-ignore
