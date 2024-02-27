@@ -84,6 +84,10 @@ module.exports = {
         "collapsible-up": "collapsible-up 0.2s ease-in-out",
         slideUp: "slideUp 0.5s ease-out",
       },
+      fontFamily: {
+        sora: ["Inter", "ui-sans-serif", "system-ui"],
+        // roboto: ["ui-sans-serif", "system-ui", "Roboto"], // other font families...
+      },
     },
   },
   plugins: [animate],

@@ -2,10 +2,10 @@
   <div class="flex flex-col items-center">
     <div
       :class="[
-        'bg-[#EDEDED] sm:w-[45rem] transition-block',
+        'bg-[#EDEDED] w-[45rem] transition-block',
         isSticky
-          ? 'font-inter  sm:mx-auto sm:rounded-b-[2rem] fixed flex shadow-md items-center top-0 left-1/2 transform -translate-x-1/2 z-50 sm:h-24 justify-between px-10'
-          : 'font-inter p-8 sm:mx-auto sm:rounded-[2rem] flex shadow-md my-8 sm:h-[26rem] justify-between pt-12',
+          ? 'font-inter  mx-auto rounded-b-[2rem] fixed flex shadow-md items-center top-0 left-1/2 transform -translate-x-1/2 z-50 h-24 justify-between px-10'
+          : 'font-inter p-8 mx-auto rounded-[2rem] flex shadow-md my-8 h-[26rem] justify-between pt-12',
       ]"
     >
       <img
@@ -15,21 +15,21 @@
         class="h-20 w-12"
       />
       <!-- Примеры кружков для выбора размера -->
-      <div v-if="isSticky" class="flex items-center space-x-2 sm:space-x-2">
+      <div v-if="isSticky" class="flex items-center space-x-2">
         <div
           v-for="size in product.sizes"
           :key="size.volume"
-          class="text-center rounded-full sm:w-16 sm:h-16 flex flex-col items-center justify-center"
+          class="text-center rounded-full w-16 h-16 flex flex-col items-center justify-center"
           :class="
             size.isSelected
               ? 'bg-[#0841A3] text-white'
               : 'bg-[#C1C1C1] text-gray-900'
           "
         >
-          <div class="sm:text-xl font-bold leading-none">
+          <div class="text-xl font-bold leading-none">
             {{ size.volume }}
           </div>
-          <div class="sm:text-sm font-bold leading-none">мл</div>
+          <div class="text-sm font-bold leading-none">мл</div>
         </div>
       </div>
       <div v-if="isSticky" class="text-3xl font-bold text-[#0841A3]">
@@ -120,9 +120,9 @@
         </div>
       </div>
     </div>
-    <!-- настройки -->
-    <div class="flex flex-col w-full sm:w-[45rem] mt-8">
-      <div class="text-xl sm:text-2xl mb-4 font-bold text-gray-900">
+    <!-- настройки  -->
+    <div class="flex flex-col w-[45rem] mt-8">
+      <div class="text-2xl mb-4 font-bold text-gray-900">
         настрой как тебе нравится
       </div>
       <div
@@ -130,14 +130,14 @@
         :key="categoryIndex"
         class="mb-5"
       >
-        <div class="text-xl sm:text-2xl mb-2 font-bold text-gray-900">
+        <div class="text-2xl mb-2 font-bold text-gray-900">
           {{ category.name }}
         </div>
         <div class="flex flex-wrap">
           <div
             v-for="(option, optionIndex) in category.items"
             :key="optionIndex"
-            class="min-w-36 max-w-36 relative p-4 mr-3 mb-3 bg-white rounded-xl shadow-md cursor-pointer"
+            class="min-w-36 max-w-36 relative p-4 mr-3 bg-white rounded-xl shadow-md cursor-pointer"
             :class="{
               'ring-2 ring-blue-500':
                 selectedOptions[category.id] === option.id,
@@ -286,12 +286,12 @@ const options = [
         imageUrl: "path_to_image_chocolate_topping",
       },
       {
-        id: "whipped_cream1",
+        id: "whipped_cream",
         label: "Взбитые сливки",
         imageUrl: "path_to_image_whipped_cream",
       },
       {
-        id: "chocolate1",
+        id: "chocolate",
         label: "Шоколад",
         imageUrl: "path_to_image_chocolate_topping",
       },
@@ -321,13 +321,5 @@ options.forEach((category) => {
 <style scoped>
 .transition-block {
   transition: height 0.5s ease, background-color 0.5s ease;
-}
-@media (max-width: 640px) {
-  .min-w-36 {
-    min-width: 9rem; /* Уменьшим минимальную ширину элементов */
-  }
-  .max-w-36 {
-    max-width: 9rem; /* Уменьшим максимальную ширину элементов */
-  }
 }
 </style>
