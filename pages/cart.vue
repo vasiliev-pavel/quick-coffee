@@ -16,19 +16,18 @@ import { cups, categories, products } from "~/mock/index";
 const confirmPay = async () => {
   try {
     // Запрашиваем сессию Stripe для оплаты
-    const { data: session } = await useFetch(`/api/payment`, {
+    const { data: session } = await useFetch(`/api/payment/`, {
       method: "post",
       body: {
         line_items: await createLineItems(),
       },
     });
-    console.log(session);
     // Перенаправляем пользователя на Stripe
-    // if (session && session.url) {
-    //   navigateTo(`${session.url}`, { external: true });
-    // } else {
-    //   console.error("Ошибка: URL сессии Stripe не получен");
-    // }
+    if (session && session.value.url) {
+      navigateTo(`${session.value.url}`, { external: true });
+    } else {
+      console.error("Ошибка: URL сессии Stripe не получен");
+    }
   } catch (error) {
     console.error("Ошибка при инициации сессии оплаты:", error);
   }
@@ -39,7 +38,7 @@ const createPrice = async () => {
     const price = await $fetch(`/api/payment/price`, {
       method: "post",
       body: {
-        amount: 1,
+        amount: 100,
         name: "Cappuccino",
       },
     });
