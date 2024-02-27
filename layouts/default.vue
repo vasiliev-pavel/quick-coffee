@@ -4,5 +4,6 @@
   </header>
   <main class="container relative overflow-x-hidden">
     <slot />
+    <Toaster />
   </main>
 </template>
