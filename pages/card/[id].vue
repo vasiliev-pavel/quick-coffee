@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="flex flex-col md:flex-row rounded-lg bg-[#0f172afa] text-white p-4"
-  >
+  <div class="flex flex-col md:flex-row rounded-lg bg-[#0f172afa] text-white p-4">
     <div class="md:w-1/2">
       <video autoplay loop muted class="rounded-lg">
         <source src="/live.mp4" type="video/mp4" />
@@ -14,29 +12,18 @@
         <Button variant="secondary" class="ml-4">Add $3.45</Button>
       </div>
       <ActiveItemDetails :item="activeItem" />
-      <Carousel
-        class="menu_carousel my-6 rounder text-xl text-white text-left font-bold"
-      >
+      <Carousel class="menu_carousel my-6 rounder text-xl text-white text-left font-bold">
         <CarouselContent class="menu_carousel_content">
-          <CarouselItem
-            v-for="item in carouselItems"
-            :key="item.id"
-            class="basis-1/3"
-            @click="setActiveItem(item)"
-          >
-            {{ item.title }}
+          <CarouselItem v-for="item in carouselItems" :key="item.id" class="basis-1/3" @click="setActiveItem(item)">
+            <!-- {{ item.title }} -->
           </CarouselItem>
         </CarouselContent>
       </Carousel>
 
       <span class="text-2xl mt-2">Smooth espresso with steamed milk</span>
-      <span class="text-xl text-slate-400 mt-2"
-        >Ingredients: Espresso, Milk</span
-      >
+      <span class="text-xl text-slate-400 mt-2">Ingredients: Espresso, Milk</span>
       <span class="text-xl text-slate-400 mt-2">May Contain: Nuts, Gluten</span>
-      <span class="text-xl text-slate-400 mt-2"
-        >Allergens: Caffeine, Lactose</span
-      >
+      <span class="text-xl text-slate-400 mt-2">Allergens: Caffeine, Lactose</span>
       <span class="text-xl text-slate-500 mt-2">Nutritions: 188kcal</span>
       <span class="text-xl text-slate-500 mt-2">Weight: 190g</span>
       <span class="text-xl text-slate-500 mt-2">Protein: 5.8g</span>
