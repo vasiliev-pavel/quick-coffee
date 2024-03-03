@@ -121,7 +121,7 @@
       </div>
     </div>
     <!-- настройки -->
-    <div class="flex flex-col w-full sm:w-[45rem] mt-8">
+    <!-- <div class="flex flex-col w-full sm:w-[45rem] mt-8">
       <div class="text-xl sm:text-2xl mb-4 font-bold text-gray-900">
         настрой как тебе нравится
       </div>
@@ -174,7 +174,26 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
+    <!-- <div class="flex flex-wrap -m-2">
+      <div
+        v-for="option in options"
+        :key="option.id"
+        class="p-2 w-1/2 sm:w-1/3 md:w-1/4"
+      >
+        <div
+          class="flex flex-col items-center bg-white shadow rounded-lg overflow-hidden"
+        >
+          <img :src="option.imageUrl" alt="" class="w-full h-32 object-cover" />
+          <div class="p-4 w-full">
+            <div class="text-center text-sm font-semibold h-12 overflow-hidden">
+              {{ option.name }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>-->
+    <CardCategoryOp :options="options" />
   </div>
 </template>
 
@@ -221,6 +240,7 @@ const options = [
       },
       // ... другие варианты стаканов
     ],
+    imageUrl: "/coffee.png",
   },
   {
     id: "syrup",
@@ -238,6 +258,7 @@ const options = [
       },
       // ... другие варианты сиропов
     ],
+    imageUrl: "/coffee.png",
   },
   {
     id: "milk",
@@ -253,6 +274,7 @@ const options = [
 
       // ... другие варианты молока
     ],
+    imageUrl: "/coffee.png",
   },
   {
     id: "temperature",
@@ -270,6 +292,7 @@ const options = [
       },
       // ... другие варианты температуры
     ],
+    imageUrl: "/coffee.png",
   },
   {
     id: "topping",
@@ -297,6 +320,7 @@ const options = [
       },
       // ... другие варианты топпингов
     ],
+    imageUrl: "/coffee.png",
   },
   // Добавьте здесь другие категории, если необходимо
 ];
@@ -322,12 +346,31 @@ options.forEach((category) => {
 .transition-block {
   transition: height 0.5s ease, background-color 0.5s ease;
 }
-@media (max-width: 640px) {
-  .min-w-36 {
-    min-width: 9rem; /* Уменьшим минимальную ширину элементов */
-  }
-  .max-w-36 {
-    max-width: 9rem; /* Уменьшим максимальную ширину элементов */
-  }
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start; /* Это обеспечивает прижатие к левой стороне */
+}
+.category {
+  width: calc(50% - 10px); /* Вычитаем margin */
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.category-image {
+  width: 100%; /* Занимает всю ширину блока */
+  height: auto; /* Сохраняет пропорции изображения */
+}
+.category-name {
+  font-size: 16px; /* Размер шрифта */
+  width: 100%; /* Ширина соответствует ширине картинки */
+  height: 40px; /* Зарезервированное место для текста (достаточно для двух строк) */
+  overflow: hidden; /* Скрывает текст, выходящий за пределы */
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Ограничивает количество строк до 2 */
+  -webkit-box-orient: vertical;
 }
 </style>

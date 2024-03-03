@@ -5,7 +5,7 @@
     @click="$emit('update:isOpen', false)"
   >
     <div
-      class="fixed bottom-0 inset-x-0 p-5 border shadow-lg bg-white rounded-t-md animate-slideUp md:animate-none md:relative md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-auto md:max-w-md md:rounded-md w-96 h-60"
+      class="fixed bottom-0 inset-x-0 p-4 md:p-5 border shadow-lg bg-white rounded-t-xl md:rounded-xl animate-slideUp md:animate-none md:relative md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-auto w-full max-w-md h-auto"
       @click.stop
     >
       <div class="text-center">
@@ -70,9 +70,6 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { nextTick } from "vue";
-
 const supabase = useSupabaseClient();
 const props = defineProps({
   isOpen: Boolean,
@@ -191,19 +188,4 @@ const signOut = async () => {
 };
 </script>
 
-<style>
-.form-container {
-  width: 100%; /* или конкретное значение в px */
-  max-width: 400px; /* пример максимальной ширины */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.form-container input,
-.form-container button {
-  width: 90%; /* Процентное значение для внутренних элементов */
-  margin: 10px 0; /* Отступы для выравнивания */
-}
-</style>
+<style></style>

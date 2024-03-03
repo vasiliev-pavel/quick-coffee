@@ -2,10 +2,10 @@
   <div class="flex flex-col items-center">
     <div
       :class="[
-        'bg-[#EDEDED] w-[45rem] transition-block',
+        'bg-[#EDEDED] w-[45rem] font-inter mx-auto p-8 flex shadow-md justify-between',
         isSticky
-          ? 'font-inter  mx-auto rounded-b-[2rem] fixed flex shadow-md items-center top-0 left-1/2 transform -translate-x-1/2 z-50 h-24 justify-between px-10'
-          : 'font-inter p-8 mx-auto rounded-[2rem] flex shadow-md my-8 h-[26rem] justify-between pt-12',
+          ? 'rounded-b-[2rem] fixed items-center top-0 left-1/2 transform -translate-x-1/2 z-50 h-24 px-10'
+          : 'rounded-[2rem] my-8 h-[26rem] pt-12 ',
       ]"
     >
       <img
@@ -120,9 +120,12 @@
         </div>
       </div>
     </div>
-    <!-- настройки  -->
-    <div class="flex flex-col w-[45rem] mt-8">
-      <div class="text-2xl mb-4 font-bold text-gray-900">
+
+    <!-- Настройки -->
+    <!-- <div
+      class="flex flex-col w-full max-w-5xl mt-8 px-4 sm:px-6 lg:px-8 mx-auto"
+    >
+      <div class="text-xl sm:text-2xl mb-4 font-bold text-gray-900 text-center">
         настрой как тебе нравится
       </div>
       <div
@@ -130,51 +133,57 @@
         :key="categoryIndex"
         class="mb-5"
       >
-        <div class="text-2xl mb-2 font-bold text-gray-900">
+        <div
+          class="text-lg sm:text-xl mb-2 font-bold text-gray-900 text-center"
+        >
           {{ category.name }}
         </div>
-        <div class="flex flex-wrap">
+        <div class="flex flex-wrap justify-center -mx-2">
           <div
             v-for="(option, optionIndex) in category.items"
             :key="optionIndex"
-            class="min-w-36 max-w-36 relative p-4 mr-3 bg-white rounded-xl shadow-md cursor-pointer"
-            :class="{
-              'ring-2 ring-blue-500':
-                selectedOptions[category.id] === option.id,
-            }"
-            @click="selectedOptions[category.id] = option.id"
+            class="p-2 mb-4 w-1/2 sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5"
           >
-            <img
-              :src="option.imageUrl"
-              :alt="option.label"
-              class="w-full h-32 object-cover rounded-xl mb-2"
-            />
-            <div class="text-sm mb-2">{{ option.label }}</div>
-            <input
-              type="radio"
-              :id="`option-${category.id}-${option.id}`"
-              class="hidden"
-              :name="`option-${category.id}`"
-              v-model="selectedOptions[category.id]"
-              :value="option.id"
-            />
-            <label
-              :for="`option-${category.id}-${option.id}`"
-              class="absolute bottom-0 right-0 mb-2 mr-2"
+            <div
+              class="min-w-full max-w-full relative p-4 bg-white rounded-xl shadow-md cursor-pointer flex flex-col items-center"
+              :class="{
+                'ring-2 ring-blue-500':
+                  selectedOptions[category.id] === option.id,
+              }"
+              @click="selectedOptions[category.id] = option.id"
             >
-              <div
-                class="w-6 h-6 rounded-full border border-gray-300 flex items-center justify-center"
+              <img
+                :src="option.imageUrl"
+                :alt="option.label"
+                class="w-full h-32 object-cover rounded-xl mb-2"
+              />
+              <div class="text-sm mb-2 text-center">{{ option.label }}</div>
+              <input
+                type="radio"
+                :id="`option-${category.id}-${option.id}`"
+                class="hidden"
+                :name="`option-${category.id}`"
+                v-model="selectedOptions[category.id]"
+                :value="option.id"
+              />
+              <label
+                :for="`option-${category.id}-${option.id}`"
+                class="absolute bottom-0 right-0 mb-2 mr-2"
               >
                 <div
-                  class="w-4 h-4 rounded-full bg-blue-500"
-                  v-if="selectedOptions[category.id] === option.id"
-                ></div>
-              </div>
-            </label>
+                  class="w-6 h-6 rounded-full border border-gray-300 flex items-center justify-center"
+                >
+                  <div
+                    class="w-4 h-4 rounded-full bg-blue-500"
+                    v-if="selectedOptions[category.id] === option.id"
+                  ></div>
+                </div>
+              </label>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -183,6 +192,7 @@ const isSticky = ref(false);
 
 const handleScroll = () => {
   isSticky.value = window.scrollY > 0;
+  console.log("isSticky is now", isSticky.value); // Добавьте эту строку для отладки
 };
 
 onMounted(() => {
@@ -212,7 +222,7 @@ const options = [
       {
         id: "standard",
         label: "Стандартный",
-        imageUrl: "path_to_image_standard_cup",
+        imageUrl: "./coffee.png",
       },
       {
         id: "personal",
@@ -318,8 +328,4 @@ options.forEach((category) => {
 });
 </script>
 
-<style scoped>
-.transition-block {
-  transition: height 0.5s ease, background-color 0.5s ease;
-}
-</style>
+<style></style>
